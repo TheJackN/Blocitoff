@@ -1,12 +1,10 @@
 class UserPolicy < ApplicationPolicy
-  # attr_reader :user, :record
-  #
-  # def initialize
-  #   @user = user
-  #   @record = record
-  # end
 
   def show?
+    user.present?
+  end
+
+  def alter?
     user.present? && record == user
   end
 end

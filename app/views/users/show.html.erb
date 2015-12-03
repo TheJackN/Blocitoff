@@ -1,19 +1,33 @@
-<h2 class="text text-center">My Profile</h2>
+<% if policy(@user).alter? %>
+  <h2 class="text text-center">My Profile</h2>
+<% else %>
+  <h2 class="text text-center"><%= @user.name %>'s Profile</h2>
+<% end %>
 <br />
-<div class="row">
-  <div class="col-md-4">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="text text-center"><u>Account Info</u></h4>
-      </div>
-      <div class="panel-body">
-        <div class="text text-center">
-          <br />
-          <p><strong>Name:</strong> <%= @user.name %></p>
-          <p><strong>Email:</strong> <%= @user.email %></p>
-          <p><%= link_to 'Edit Profile Info', edit_user_registration_path, class: 'btn btn-success' %></p>
+<% if policy(@user).alter? %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h4 class="text text-center"><u>Account Info</u></h4>
+        </div>
+        <div class="panel-body">
+          <div class="text text-center">
+            <br />
+            <p><strong>Name:</strong> <%= @user.name %></p>
+            <p><strong>Email:</strong> <%= @user.email %></p>
+            <p><%= link_to 'Edit Profile Info', edit_user_registration_path, class: 'btn btn-success' %></p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col-md-8">
+    <%= render partial: 'items/item', locals: { user: @user } %>
+    <% if policy(@user).alter? %>
+      <%= render partial: 'items/form', locals: { user: @user, item: Item.new } %>
+    <% end %>
   </div>
 </div>

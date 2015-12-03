@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_action :load_user
-
+  
   def show
   end
 
@@ -12,6 +12,7 @@ class UsersController < ApplicationController
       redirect_to new_user_session_path
     else
       @user = User.find(params[:id])
+      @item = @user.items
       authorize @user
     end
   end

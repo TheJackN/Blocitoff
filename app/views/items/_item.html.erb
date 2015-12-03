@@ -1,0 +1,28 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Time Left</th>
+      <th>Complete?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @user.items.blank? %>
+      <tr>
+        <td>No To-Do Items Left!</td>
+      </tr>
+    <% else %>
+      <% @user.items.each do |item| %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= time_left(item) %></td>
+          <% if policy(item).destroy? %>
+            <td><%= link_to "", user_item_path(item.user, item), method: :delete, class: 'glyphicon glyphicon-ok' %></td>
+          <% else %>
+            <td>Not Yet!</td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
