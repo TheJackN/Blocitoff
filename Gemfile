@@ -66,3 +66,5 @@ gem 'pundit'
 gem "simple_form"
 
 gem 'bootstrap-sass'
+# Used to easily schedule cron-jobs
+gem 'whenever', :require => false
